@@ -1,0 +1,45 @@
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin center-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin border($borderColor, $brad: 0) {
+  border: 1px solid $borderColor;
+  border-radius: $brad;
+}
+
+@mixin fonts($size: 22px, $weight: 400, $family: "Urbanist") {
+  font-size: $size;
+  font-weight: $weight;
+  font-family: $family, sans-serif;
+}
+
+@mixin icon($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin text-nowrap($textOverflow: ellipsis) {
+  white-space: nowrap;
+  text-overflow: $textOverflow;
+  overflow-x: hidden;
+}
+
+@mixin image($size: cover) {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: $size;
+}
+
+@mixin flex-list($gap: 16px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}

@@ -1,0 +1,29 @@
+@import "./fonts.scss";
+@import "./colors.scss";
+@import "./mixins.scss";
+@import "./typography.scss";
+
+@import "./views/index.scss";
+
+html,
+body {
+  font-family: "Urbanist", sans-serif;
+  color: $black;
+  scroll-behavior: smooth;
+  margin: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+a {
+  color: $primary-text-color;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($primary-text-color, 10%);
+  }
+}
+
+main {
+  min-height: 70vh;
+}

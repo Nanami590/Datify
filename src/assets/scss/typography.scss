@@ -1,0 +1,87 @@
+@mixin h1 {
+  @include fonts(48px, 350);
+  line-height: 47px;
+}
+
+@mixin h2 {
+  @include fonts(32px, 350);
+  line-height: 47px;
+}
+
+@mixin h3($weight: 300) {
+  @include fonts(24px, $weight);
+  line-height: 124%;
+}
+
+@mixin h4($weight: 500) {
+  @include fonts(24px, $weight);
+  line-height: 32px;
+}
+
+@mixin h5($weight: 500) {
+  @include fonts(20px, $weight);
+  line-height: 26px;
+}
+
+@mixin h6($weight: 600) {
+  @include fonts(18px, $weight);
+  line-height: 24px;
+}
+
+@mixin text($weight: 400) {
+  @include fonts(16px, $weight);
+  line-height: 24px;
+}
+
+@mixin desc-1($weight: 400) {
+  @include fonts(14px, $weight);
+  line-height: 20px;
+}
+
+@mixin desc-2($weight: 400) {
+  @include fonts(12px, $weight);
+  line-height: 16px;
+}
+
+h1,
+.h1 {
+  @include h1;
+}
+
+h2,
+.h2 {
+  @include h2;
+}
+
+h3,
+.h3 {
+  @include h3;
+}
+
+h4,
+.h4 {
+  @include h4;
+}
+
+h5,
+.h5 {
+  @include h5;
+}
+
+h6,
+.h6 {
+  @include h6;
+}
+
+p,
+.text {
+  @include text;
+}
+
+.desc-1 {
+  @include desc-1;
+}
+
+.desc-2 {
+  @include desc-2;
+}
