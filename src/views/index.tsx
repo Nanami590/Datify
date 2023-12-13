@@ -2,24 +2,34 @@ import HomeView from "./Home";
 import AboutUsView from "./AboutUs";
 import ViewNotFound from "./ViewNotFound";
 import CounterView from "./Counter";
-import LoginView from "./Login";
+import SignInView from "./Signin";
+import { ROUTES } from "../entities/common/constant";
+import SignUpView from "./Signup";
 
 const routes = [
   {
-    path: "/",
+    path: ROUTES.HOME,
     element: <HomeView />,
   },
   {
-    path: "/login",
-    element: <LoginView />,
+    path: ROUTES.SIGN_IN,
+    element: <SignInView />,
   },
   {
-    path: "counter",
+    path: ROUTES.SIGN_UP,
+    element: <SignUpView />,
+  },
+  {
+    path: ROUTES.COUNTER,
     element: <CounterView />,
   },
   {
-    path: "about",
+    path: ROUTES.ABOUT,
     element: <AboutUsView />,
+  },
+  {
+    path: ROUTES.PRIVACY_POLICY,
+    element: <>Privacy policy</>,
   },
   {
     path: "*",
