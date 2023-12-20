@@ -16,5 +16,11 @@
 
   .login-page__form {
     @include flex-list;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .login-page__form__forgot-wrapper {
+    @include center-between;
   }
 }

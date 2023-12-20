@@ -1,10 +1,16 @@
 .checkbox__wrapper {
+  .MuiButtonBase-root.MuiCheckbox-root {
+    padding: 4px;
+  }
+
   .checkbox__input {
   }
 
   .checkbox__label {
+    @include desc-1;
   }
 
   .checkbox__error {
+    @include error-text;
   }
 }

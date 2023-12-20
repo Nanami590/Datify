@@ -4,10 +4,27 @@
 
   .input-field__input {
     input {
+      @include desc-1;
+      min-height: 40px;
       width: 100%;
+      border-radius: 8px;
+      border: 0;
+      background: $fields-color;
+      color: $primary-text-color;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 8px;
+      box-sizing: border-box;
+
+      &::placeholder {
+        color: $secondary-text-color;
+        font-weight: 400;
+        letter-spacing: normal;
+      }
     }
   }
 
   .input-field__error {
+    @include error-text;
   }
 }

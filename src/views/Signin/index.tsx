@@ -1,12 +1,12 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button } from "@mui/base";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../entities/common/constant";
-import Checkbox from "../../ui/Checkbox";
-import Input from "../../ui/Input";
+import { ROUTES } from "entities/common/constant";
+import Checkbox from "ui/Checkbox";
+import Input from "ui/Input";
+import Button from "ui/Button";
 
 const schema = yup
   .object({
@@ -38,7 +38,9 @@ const SignInView = () => {
 
       <h1>Datify</h1>
 
-      <p className="text">Please enter your email & password to sign in</p>
+      <h6 className="fw-400 text-center">
+        Please enter your email & password to sign in
+      </h6>
 
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
         <Input
@@ -56,7 +58,7 @@ const SignInView = () => {
           error={errors?.password?.message as undefined}
         />
 
-        <div>
+        <div className="login-page__form__forgot-wrapper">
           <Checkbox
             id={"remember"}
             label="Remember me"
@@ -72,7 +74,7 @@ const SignInView = () => {
         </Button>
       </form>
 
-      <span className="desc-2">
+      <span className="desc-1">
         Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
       </span>
     </main>

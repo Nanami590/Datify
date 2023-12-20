@@ -43,3 +43,9 @@
   flex-direction: column;
   gap: $gap;
 }
+
+@mixin error-text {
+  @include desc-2;
+  color: $error-color;
+  padding-left: 4px;
+}

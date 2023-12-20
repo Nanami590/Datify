@@ -1,9 +1,17 @@
+$font-weights: 100, 200, 300, 400, 500, 600, 700;
+
 .center {
   @include center;
 }
 
 .center-between {
   @include center-between;
+}
+
+@each $weight in $font-weights {
+  .fw-#{$weight} {
+    font-weight: $weight;
+  }
 }
 
 @for $index from 0 through 10 {
@@ -46,4 +54,16 @@
   .p-#{$index} {
     padding: $index * 4px;
   }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }

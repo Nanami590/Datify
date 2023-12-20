@@ -1,12 +1,12 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button } from "@mui/base";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../entities/common/constant";
-import Checkbox from "../../ui/Checkbox";
-import Input from "../../ui/Input";
+import { ROUTES } from "entities/common/constant";
+import Checkbox from "ui/Checkbox";
+import Input from "ui/Input";
+import Button from "ui/Button";
 
 const schema = yup
   .object({
@@ -45,7 +45,7 @@ const SignUpView = () => {
 
       <h1>Datify</h1>
 
-      <p className="text">Create an account</p>
+      <h6 className="fw-400 text-center">Create an account</h6>
 
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
         <Input
@@ -90,7 +90,7 @@ const SignUpView = () => {
         </Button>
       </form>
 
-      <span className="desc-2">
+      <span className="desc-1">
         Already have an account? <Link to={ROUTES.SIGN_IN}>Sign In</Link>
       </span>
     </main>
