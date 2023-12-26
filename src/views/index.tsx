@@ -5,6 +5,7 @@ import CounterView from "./Counter";
 import SignInView from "./Signin";
 import { ROUTES } from "../entities/common/constant";
 import SignUpView from "./Signup";
+import FirstTry from "./FirstTry";
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: ROUTES.ABOUT,
     element: <AboutUsView />,
+  },
+  {
+    path: ROUTES.FIRST_TRY,
+    element: <FirstTry />,
   },
   {
     path: ROUTES.PRIVACY_POLICY,

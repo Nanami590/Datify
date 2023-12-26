@@ -2,7 +2,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "entities/common/constant";
 import Checkbox from "ui/Checkbox";
 import Input from "ui/Input";
@@ -30,6 +30,7 @@ type InputsType = {
 };
 
 const SignUpView = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -37,7 +38,11 @@ const SignUpView = () => {
   } = useForm<InputsType>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<InputsType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<InputsType> = (data) => {
+    if (data) {
+      navigate(ROUTES.FIRST_TRY);
+    }
+  };
 
   return (
     <main className="login-page">
