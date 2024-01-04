@@ -1,0 +1,23 @@
+.birthday-input {
+  @include center;
+  width: 100%;
+
+  &__input {
+    .input-field__input {
+      // TODO fix
+      input {
+        border-radius: 0;
+
+        &:first-child {
+          border-top-left-radius: 16px;
+          border-bottom-left-radius: 16px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 16px;
+          border-bottom-right-radius: 16px;
+        }
+      }
+    }
+  }
+}

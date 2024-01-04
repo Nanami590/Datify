@@ -1,20 +1,12 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "entities/common/constant";
 import Checkbox from "ui/Checkbox";
 import Input from "ui/Input";
 import Button from "ui/Button";
-
-const schema = yup
-  .object({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-    remember: yup.boolean(),
-  })
-  .required();
+import { schema } from "./schema";
 
 type InputsType = {
   email: string;
