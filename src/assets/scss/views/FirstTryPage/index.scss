@@ -1,0 +1,25 @@
+.first-try-page {
+  padding: 8px;
+
+  &__headline {
+    @include center;
+    gap: 8px;
+
+    &__stepper {
+      margin-right: calc(24px + 24px + 8px);
+      margin-left: 24px;
+    }
+  }
+
+  &__form {
+    position: relative;
+    height: 90vh;
+
+    &__submit {
+      position: absolute;
+      bottom: 32px;
+      margin-top: 16px;
+      width: 100%;
+    }
+  }
+}

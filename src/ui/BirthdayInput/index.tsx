@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   FC,
   LegacyRef,
@@ -8,28 +9,25 @@ import {
   useState,
 } from "react";
 import Input from "../Input";
+import classNames from "classnames";
 
 type PropTypes = {
   // format: MM.dd.yyyy
   value?: string;
-  onChange: (value: string) => void;
+  onChange: (event: SyntheticEvent) => void;
   error?: string;
   className?: string;
   name?: string;
 };
 
-// TODO add styles
-// TODO add errors
 const BirthdayInput: FC<PropTypes> = forwardRef(
-  ({ onChange, value = "", ...props }, ref) => {
+  ({ onChange, value = "", name, error, className, ...props }, ref) => {
     const firstFieldRef = useRef<null | HTMLInputElement>(null);
     const secondFieldRef = useRef<null | HTMLInputElement>(null);
     const thirdFieldRef = useRef<null | HTMLInputElement>(null);
     const [month, setMonth] = useState(value?.split(".")?.[0] || "");
     const [day, setDay] = useState(value?.split(".")?.[1] || "");
     const [year, setYear] = useState(value?.split(".")?.[2] || "");
-
-    console.log("props", props);
 
     const handleChange =
       (type: "day" | "month" | "year") => (event: SyntheticEvent) => {
@@ -42,12 +40,17 @@ const BirthdayInput: FC<PropTypes> = forwardRef(
 
         const isAdd = (isMonth && length > 1) || (isDay && length > 1);
         const isRemove = (isDay && !length) || (isYear && !length);
+        const value = fieldValue.slice(0, isYear ? 4 : 2);
 
         const monthInput = getInput(firstFieldRef);
         const dayInput = getInput(secondFieldRef);
         const yearInput = getInput(thirdFieldRef);
 
-        (isMonth ? setMonth : isDay ? setDay : setYear)(fieldValue);
+        if (isMonth && Number(value) > 12) {
+          setMonth((prevState) => prevState);
+        } else {
+          (isMonth ? setMonth : isDay ? setDay : setYear)(value);
+        }
 
         if (isAdd) {
           (isMonth ? dayInput : yearInput)?.focus();
@@ -70,41 +73,55 @@ const BirthdayInput: FC<PropTypes> = forwardRef(
       }
     }, [firstFieldRef, secondFieldRef, thirdFieldRef]);
 
+    // for react-hook-form
     useEffect(() => {
       if (month && day && year) {
-        onChange(`${month}.${day}.${year}`);
+        // @ts-ignore
+        onChange({ target: { value: `${month}.${day}.${year}`, name } });
       } else if (month && day) {
-        onChange(`${month}.${day}`);
+        // @ts-ignore
+        onChange({ target: { value: `${month}.${day}`, name } });
       } else if (month) {
-        onChange(`${month}`);
+        // @ts-ignore
+        onChange({ target: { value: month, name } });
       }
-    }, [day, month, onChange, year]);
+    }, [day, month, onChange, year, name]);
 
     return (
-      <div ref={ref as LegacyRef<HTMLDivElement>} className="birthday-input">
-        <Input
-          ref={firstFieldRef}
-          placeholder="MM"
-          value={month}
-          onChange={handleChange("month")}
-          className="birthday-input__input birthday-input__month"
-        />
+      <div
+        ref={ref as LegacyRef<HTMLDivElement>}
+        className={classNames("birthday-input", className)}
+      >
+        <div className="birthday-input__wrapper" {...props}>
+          <Input
+            ref={firstFieldRef}
+            placeholder="MM"
+            value={month}
+            type="number"
+            onChange={handleChange("month")}
+            className="birthday-input__input birthday-input__month"
+          />
 
-        <Input
-          ref={secondFieldRef}
-          placeholder="DD"
-          value={day}
-          onChange={handleChange("day")}
-          className="birthday-input__input birthday-input__day"
-        />
+          <Input
+            ref={secondFieldRef}
+            placeholder="DD"
+            value={day}
+            type="number"
+            onChange={handleChange("day")}
+            className="birthday-input__input birthday-input__day"
+          />
 
-        <Input
-          ref={thirdFieldRef}
-          placeholder="YYYY"
-          value={year}
-          onChange={handleChange("year")}
-          className="birthday-input__input birthday-input__year"
-        />
+          <Input
+            ref={thirdFieldRef}
+            placeholder="YYYY"
+            value={year}
+            type="number"
+            onChange={handleChange("year")}
+            className="birthday-input__input birthday-input__year"
+          />
+        </div>
+
+        {error && <p className="birthday-input__error">{error}</p>}
       </div>
     );
   }
