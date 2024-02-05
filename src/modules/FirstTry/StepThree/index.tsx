@@ -1,20 +1,58 @@
-import { FirstTryForm } from "@/entities/common/FirstTry/types";
+import {
+  FirstTryForm,
+  FirstTryFormSexType,
+  FirstTryStepThreeGroup,
+} from "@/entities/common/FirstTry/types";
+import Button from "@/ui/Button";
 import { FC } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormSetValue } from "react-hook-form";
+import FirstTryInfo from "../FirstTryInfo";
 
 type PropTypes = {
+  value: FirstTryFormSexType;
   errors: FieldErrors<FirstTryForm>;
-  register: UseFormRegister<FirstTryForm>;
+  setValue: UseFormSetValue<FirstTryForm>;
 };
 
-const StepThree: FC<PropTypes> = ({ register, errors }) => {
-  return (
-    <div>
-      <h4>Be true to yourself</h4>
+const StepThree: FC<PropTypes> = ({ errors, setValue, value }) => {
+  const handleClick = (value: FirstTryFormSexType) => () => {
+    setValue("sex", value, { shouldValidate: true });
+  };
 
-      <p>Choose the gender that best represent you.</p>
+  const buttonGroup: FirstTryStepThreeGroup[] = [
+    { text: "Man", type: "male" },
+    { text: "Woman", type: "female" },
+    { text: "Other", type: "other" },
+  ];
+
+  return (
+    <div className="first-try__step-three">
+      <FirstTryInfo
+        title={"Be true to yourself"}
+        description={"Choose the gender that best represent you."}
+      />
+
+      <div className="first-try__step-three__button-group">
+        {buttonGroup.map(({ text, type }) => (
+          <Button
+            key={type}
+            variant={getVariant(type, value)}
+            onClick={handleClick(type)}
+          >
+            {text}
+          </Button>
+        ))}
+      </div>
+
+      {!!errors?.sex?.message && (
+        <p className="birthday-input__error">{errors.sex.message}</p>
+      )}
     </div>
   );
 };
+
+function getVariant(key: FirstTryFormSexType, value: FirstTryFormSexType) {
+  return key === value ? "primary" : "secondary";
+}
 
 export default StepThree;

@@ -11,3 +11,7 @@ export const stepTwoSchema = yup
     birthday: yup.string().required(),
   })
   .required();
+
+export const stepThreeSchema = yup
+  .object({ sex: yup.string().required() })
+  .required();

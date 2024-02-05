@@ -1,0 +1,14 @@
+.first-try__step-three {
+  width: 100%;
+
+  &__button-group {
+    @include center;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+
+    button {
+      width: 100%;
+    }
+  }
+}

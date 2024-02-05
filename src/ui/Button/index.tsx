@@ -4,11 +4,24 @@ import classNames from "classnames";
 
 type PropTypes = ButtonProps & {
   children: ReactNode;
+  variant?: "primary" | "secondary";
 };
 
-const Button: FC<PropTypes> = ({ children, className, ...props }) => {
+const Button: FC<PropTypes> = ({
+  children,
+  className,
+  variant = "primary",
+  disabled = false,
+  ...props
+}) => {
   return (
-    <MUIButton className={classNames("button", className)} {...props}>
+    <MUIButton
+      className={classNames("button", `button__${variant}`, className, {
+        button__disabled: disabled,
+      })}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </MUIButton>
   );

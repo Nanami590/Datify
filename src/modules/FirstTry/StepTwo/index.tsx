@@ -2,6 +2,7 @@ import { FirstTryForm } from "@/entities/common/FirstTry/types";
 import BirthdayInput from "@/ui/BirthdayInput";
 import { FC } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import FirstTryInfo from "../FirstTryInfo";
 
 type PropTypes = {
   value: string;
@@ -12,12 +13,12 @@ type PropTypes = {
 const StepTwo: FC<PropTypes> = ({ errors, register, value }) => {
   return (
     <div>
-      <h4>Let's celebrate you</h4>
-
-      <p>
-        Tell us your birthdate. Your proile does not display your birthdate,
-        only age.
-      </p>
+      <FirstTryInfo
+        title={`Let's celebrate you`}
+        description={
+          "Tell us your birthdate. Your proile does not display your birthdate, only age."
+        }
+      />
 
       <BirthdayInput
         value={value}

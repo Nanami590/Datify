@@ -6,10 +6,11 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { stepOneSchema, stepTwoSchema } from "./schema";
+import { stepOneSchema, stepThreeSchema, stepTwoSchema } from "./schema";
 import { FirstTryForm } from "@/entities/common/FirstTry/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StepThree from "@/modules/FirstTry/StepThree";
+import StepFour from "@/modules/FirstTry/StepFour";
 
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
@@ -19,6 +20,7 @@ const FirstTry: FC = () => {
   const {
     register,
     getValues,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FirstTryForm>({
@@ -56,12 +58,25 @@ const FirstTry: FC = () => {
         {step === 1 && <FirstTryStepOne register={register} errors={errors} />}
         {step === 2 && (
           <FirstTryStepTwo
+            value={getValues("birthday")}
             register={register}
             errors={errors}
-            value={getValues("birthday")}
           />
         )}
-        {step === 3 && <StepThree register={register} errors={errors} />}
+        {step === 3 && (
+          <StepThree
+            value={getValues("sex")}
+            setValue={setValue}
+            errors={errors}
+          />
+        )}
+        {step === 4 && (
+          <StepFour
+            value={getValues("goal")}
+            setValue={setValue}
+            errors={errors}
+          />
+        )}
 
         <Button className="first-try-page__form__submit" type="submit">
           Continue
@@ -77,6 +92,8 @@ function getSchemaByStep(step: number) {
       return stepOneSchema;
     case 2:
       return stepTwoSchema;
+    case 3:
+      return stepThreeSchema;
 
     default:
       return stepOneSchema;

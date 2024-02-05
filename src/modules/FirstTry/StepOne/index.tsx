@@ -2,6 +2,7 @@ import { FirstTryForm } from "@/entities/common/FirstTry/types";
 import Input from "@/ui/Input";
 import { FC } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import FirstTryInfo from "../FirstTryInfo";
 
 type PropTypes = {
   errors: FieldErrors<FirstTryForm>;
@@ -11,13 +12,16 @@ type PropTypes = {
 const StepOne: FC<PropTypes> = ({ register, errors }) => {
   return (
     <div>
-      <h4>Your datify identity</h4>
-
-      <p>
-        Create a unique nickname that represents you.
-        <br />
-        It's how others will know and remember you.
-      </p>
+      <FirstTryInfo
+        title={"Your datify identity"}
+        description={
+          <>
+            Create a unique nickname that represents you.
+            <br />
+            It's how others will know and remember you.
+          </>
+        }
+      />
 
       <Input
         placeholder="Type your nickname"
