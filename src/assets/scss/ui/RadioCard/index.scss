@@ -1,2 +1,9 @@
 .radio-card {
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid $fields-color;
+
+  &__active {
+    border-color: $primary-color;
+  }
 }

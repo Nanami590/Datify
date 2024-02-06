@@ -8,7 +8,7 @@ type PropTypes = {
 const FirstTryInfo: FC<PropTypes> = ({ description, title }) => {
   return (
     <div>
-      <h4>{title}</h4>
+      <h4 className="mb-6 mt-6">{title}</h4>
 
       <p>{description}</p>
     </div>

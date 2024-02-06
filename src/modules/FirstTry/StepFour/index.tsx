@@ -56,8 +56,12 @@ const StepFour: FC<PropTypes> = ({ errors, setValue, value }) => {
       />
 
       <div className="first-try__step-four__button-group">
-        {buttonGroup.map(({ text, type }) => (
-          <RadioCard key={type}>{text}</RadioCard>
+        {buttonGroup.map(({ text, type, description }) => (
+          <RadioCard key={type}>
+            <h6>{text}</h6>
+
+            <p>{description}</p>
+          </RadioCard>
         ))}
       </div>
 

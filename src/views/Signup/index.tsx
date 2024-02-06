@@ -48,9 +48,9 @@ const SignUpView = () => {
     <main className="login-page">
       <FavoriteIcon className="login-page__logo" />
 
-      <h1>Datify</h1>
+      <h1 className="mb-8 mt-8">Datify</h1>
 
-      <h6 className="fw-400 text-center">Create an account</h6>
+      <h6 className="mb-4 fw-400 text-center">Create an account</h6>
 
       <form onSubmit={handleSubmit(onSubmit)} className="login-page__form">
         <Input

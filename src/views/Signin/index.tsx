@@ -34,9 +34,9 @@ const SignInView = () => {
     <main className="login-page">
       <FavoriteIcon className="login-page__logo" />
 
-      <h1>Datify</h1>
+      <h1 className="mb-8 mt-8">Datify</h1>
 
-      <h6 className="fw-400 text-center">
+      <h6 className="mb-4 fw-400 text-center">
         Please enter your email & password to sign in
       </h6>
 

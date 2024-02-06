@@ -17,7 +17,7 @@ const CounterView = () => {
 
   return (
     <div>
-      <h2>{count}</h2>
+      <h2 className="mb-3">{count}</h2>
 
       <Button onClick={handleIncrement}>+1</Button>
       <Button onClick={handleDecrement}>-1</Button>
