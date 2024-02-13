@@ -6,16 +6,23 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { stepOneSchema, stepThreeSchema, stepTwoSchema } from "./schema";
+import {
+  stepFiveSchema,
+  stepFourSchema,
+  stepOneSchema,
+  stepThreeSchema,
+  stepTwoSchema,
+} from "./schema";
 import { FirstTryForm } from "@/entities/common/FirstTry/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StepThree from "@/modules/FirstTry/StepThree";
 import StepFour from "@/modules/FirstTry/StepFour";
+import StepFive from "@/modules/FirstTry/StepFive";
 
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   // TODO function for get step schema
   const {
     register,
@@ -77,6 +84,13 @@ const FirstTry: FC = () => {
             errors={errors}
           />
         )}
+        {step === 5 && (
+          <StepFive
+            value={getValues("distance")}
+            register={register}
+            errors={errors}
+          />
+        )}
 
         <Button className="first-try-page__form__submit" type="submit">
           Continue
@@ -94,6 +108,10 @@ function getSchemaByStep(step: number) {
       return stepTwoSchema;
     case 3:
       return stepThreeSchema;
+    case 4:
+      return stepFourSchema;
+    case 5:
+      return stepFiveSchema;
 
     default:
       return stepOneSchema;

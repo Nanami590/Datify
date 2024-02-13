@@ -1,14 +1,11 @@
-.first-try__step-three {
+.first-try__step-four {
   width: 100%;
+  padding-bottom: 80px;
 
   &__button-group {
     @include center;
     flex-direction: column;
     width: 100%;
-    gap: 8px;
-
-    button {
-      width: 100%;
-    }
+    gap: 16px;
   }
 }

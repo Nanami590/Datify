@@ -1,0 +1,11 @@
+.slider-field__wrapper {
+  width: 100%;
+  position: relative;
+
+  .slider-field__input {
+  }
+
+  .slider-field__error {
+    @include error-text;
+  }
+}

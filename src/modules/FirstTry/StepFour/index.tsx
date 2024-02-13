@@ -7,6 +7,8 @@ import { FC } from "react";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
 import RadioCard from "@/ui/RadioCard";
+import { StringHelper } from "@/utils/helpers/Index";
+import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {
   value: FirstTryFormGoalType;
@@ -21,25 +23,25 @@ const StepFour: FC<PropTypes> = ({ errors, setValue, value }) => {
 
   const buttonGroup: FirstTryStepFourGroup[] = [
     {
-      text: "Dating",
+      text: `Dating ${StringHelper.getEmoji(EMOJI_LIST.SMIRKING_FACE)}`,
       type: "dating",
       description:
         "Seeking love and meaningful connections? \n Choose dating for geniune relationships.",
     },
     {
-      text: "Friendship",
+      text: `Friendship ${StringHelper.getEmoji(EMOJI_LIST.RAISING_HANDS)}`,
       type: "friendship",
       description:
         "Expand yor social circle and make new friends. \n Opt for friendship today.",
     },
     {
-      text: "Casual",
+      text: `Casual ${StringHelper.getEmoji(EMOJI_LIST.LAUGHTER_FACE)}`,
       type: "casual",
       description:
         "Looking for fun and relaxed encounters? Select casual for carefree connections.",
     },
     {
-      text: "Serious Relationship",
+      text: `Serious Relationship ${StringHelper.getEmoji(EMOJI_LIST.RING)}`,
       type: "serious_relationship",
       description:
         "Ready for commitment and a lasting partnership? Pick serious relationship.",
@@ -49,7 +51,9 @@ const StepFour: FC<PropTypes> = ({ errors, setValue, value }) => {
   return (
     <div className="first-try__step-four">
       <FirstTryInfo
-        title={"Your relationship goals"}
+        title={`Your relationship goals ${StringHelper.getEmoji(
+          EMOJI_LIST.ARROW_HEART
+        )}`}
         description={
           "Choose the type of relationship you're seeking on Datify. Love, friendship, or something in between - it's your choice."
         }
@@ -57,7 +61,12 @@ const StepFour: FC<PropTypes> = ({ errors, setValue, value }) => {
 
       <div className="first-try__step-four__button-group">
         {buttonGroup.map(({ text, type, description }) => (
-          <RadioCard key={type}>
+          <RadioCard
+            key={type}
+            onClick={handleClick(type)}
+            type={getVariant(type, value)}
+            className="first-try__step-four__button-group__card"
+          >
             <h6>{text}</h6>
 
             <p>{description}</p>
@@ -73,7 +82,7 @@ const StepFour: FC<PropTypes> = ({ errors, setValue, value }) => {
 };
 
 function getVariant(key: FirstTryFormGoalType, value: FirstTryFormGoalType) {
-  return key === value ? "primary" : "secondary";
+  return key === value ? "active" : "inactive";
 }
 
 export default StepFour;

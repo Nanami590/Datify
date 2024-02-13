@@ -16,10 +16,10 @@
     height: 90vh;
 
     &__submit {
-      position: absolute;
+      position: fixed;
       bottom: 32px;
       margin-top: 16px;
-      width: 100%;
+      width: calc(100% - 16px);
     }
   }
 }

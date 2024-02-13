@@ -15,3 +15,15 @@ export const stepTwoSchema = yup
 export const stepThreeSchema = yup
   .object({ sex: yup.string().required() })
   .required();
+
+export const stepFourSchema = yup
+  .object({
+    goal: yup.string().required(),
+  })
+  .required();
+
+export const stepFiveSchema = yup
+  .object({
+    distance: yup.number().required(),
+  })
+  .required();

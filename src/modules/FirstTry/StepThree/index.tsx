@@ -7,6 +7,8 @@ import Button from "@/ui/Button";
 import { FC } from "react";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
+import { StringHelper } from "@/utils/helpers/Index";
+import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {
   value: FirstTryFormSexType;
@@ -28,7 +30,7 @@ const StepThree: FC<PropTypes> = ({ errors, setValue, value }) => {
   return (
     <div className="first-try__step-three">
       <FirstTryInfo
-        title={"Be true to yourself"}
+        title={`Be true to yourself ${StringHelper.getEmoji(EMOJI_LIST.STAR)}`}
         description={"Choose the gender that best represent you."}
       />
 

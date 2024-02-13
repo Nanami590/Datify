@@ -3,6 +3,8 @@ import Input from "@/ui/Input";
 import { FC } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
+import { StringHelper } from "@/utils/helpers/Index";
+import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {
   errors: FieldErrors<FirstTryForm>;
@@ -13,7 +15,9 @@ const StepOne: FC<PropTypes> = ({ register, errors }) => {
   return (
     <div>
       <FirstTryInfo
-        title={"Your datify identity"}
+        title={`Your datify identity ${StringHelper.getEmoji(
+          EMOJI_LIST.SMILING_FACE_WITH_SUNGLASSES
+        )}`}
         description={
           <>
             Create a unique nickname that represents you.
