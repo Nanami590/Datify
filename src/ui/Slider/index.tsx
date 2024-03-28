@@ -21,6 +21,7 @@ const Slider: FC<PropTypes> = forwardRef(
         min={Number(min)}
         max={Number(max)}
         className="slider-field__input"
+        slots={{ root: "div", thumb: "div", track: "div", rail: "div" }}
         {...props}
       />
 

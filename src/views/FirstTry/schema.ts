@@ -24,6 +24,6 @@ export const stepFourSchema = yup
 
 export const stepFiveSchema = yup
   .object({
-    distance: yup.number().required(),
+    distance: yup.number().nonNullable().required(),
   })
   .required();

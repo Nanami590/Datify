@@ -36,6 +36,8 @@ const SignUpView = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputsType>({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    /* @ts-ignore */
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<InputsType> = (data) => {

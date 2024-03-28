@@ -23,7 +23,6 @@ import StepFive from "@/modules/FirstTry/StepFive";
 const FirstTry: FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(5);
-  // TODO function for get step schema
   const {
     register,
     getValues,
@@ -31,6 +30,8 @@ const FirstTry: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FirstTryForm>({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    /* @ts-ignore */
     resolver: yupResolver(getSchemaByStep(step)),
   });
 
