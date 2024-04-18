@@ -20,6 +20,7 @@
       bottom: 32px;
       margin-top: 16px;
       width: calc(100% - 16px);
+      z-index: $ui-index-1;
     }
   }
 }

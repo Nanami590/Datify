@@ -27,3 +27,19 @@ export const stepFiveSchema = yup
     distance: yup.number().nonNullable().required(),
   })
   .required();
+
+export const stepSixSchema = yup
+  .object({
+    interests: yup
+      .array()
+      .of(
+        yup.object().shape({
+          id: yup.number(),
+          name: yup.string(),
+          emoji: yup.string(),
+        })
+      )
+      .min(5)
+      .max(5),
+  })
+  .required();

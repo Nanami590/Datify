@@ -11,7 +11,7 @@ export type FirstTryForm = {
   sex: FirstTryFormSexType;
   goal: FirstTryFormGoalType;
   distance: number;
-  interests: string[];
+  interests: FirstTryStepSixCardsType[];
   images: number[];
   location: unknown;
 };
@@ -25,4 +25,10 @@ export type FirstTryStepFourGroup = {
   text: string;
   description: string;
   type: FirstTryFormGoalType;
+};
+
+export type FirstTryStepSixCardsType = {
+  id: number;
+  name: string;
+  emoji: string;
 };

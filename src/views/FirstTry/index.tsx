@@ -3,13 +3,14 @@ import { FirstTryStepOne, FirstTryStepTwo } from "@/modules/FirstTry";
 import Button from "@/ui/Button";
 import LineStepper from "@/ui/LineStepper";
 import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   stepFiveSchema,
   stepFourSchema,
   stepOneSchema,
+  stepSixSchema,
   stepThreeSchema,
   stepTwoSchema,
 } from "./schema";
@@ -18,11 +19,13 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StepThree from "@/modules/FirstTry/StepThree";
 import StepFour from "@/modules/FirstTry/StepFour";
 import StepFive from "@/modules/FirstTry/StepFive";
+import { ObjectSchema } from "yup";
+import StepSix from "@/modules/FirstTry/StepSix";
 
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(6);
   const {
     register,
     getValues,
@@ -30,9 +33,9 @@ const FirstTry: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FirstTryForm>({
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    /* @ts-ignore */
-    resolver: yupResolver(getSchemaByStep(step)),
+    resolver: yupResolver(
+      getSchemaByStep(step) as ObjectSchema<{ [key: string]: string }>
+    ) as unknown as Resolver<FirstTryForm>,
   });
 
   const handleChangeStep = (step: 1 | -1) => () =>
@@ -47,8 +50,6 @@ const FirstTry: FC = () => {
       navigate(ROUTES.HOME);
     }
   };
-
-  console.log(errors, step);
 
   return (
     <main className="first-try-page">
@@ -92,9 +93,31 @@ const FirstTry: FC = () => {
             errors={errors}
           />
         )}
+        {step === 6 && (
+          <StepSix
+            errors={errors}
+            setValue={setValue}
+            value={getValues("interests")}
+          />
+        )}
 
-        <Button className="first-try-page__form__submit" type="submit">
-          Continue
+        <Button
+          disabled={
+            step === 6 &&
+            (getValues("interests")?.length < 5 || !getValues("interests"))
+          }
+          className="first-try-page__form__submit"
+          type="submit"
+        >
+          <span>Continue</span>
+
+          {step === 6 ? (
+            <span className="ml-1">
+              {getValues("interests")?.length || 0}/5
+            </span>
+          ) : (
+            ""
+          )}
         </Button>
       </form>
     </main>
@@ -113,6 +136,8 @@ function getSchemaByStep(step: number) {
       return stepFourSchema;
     case 5:
       return stepFiveSchema;
+    case 6:
+      return stepSixSchema;
 
     default:
       return stepOneSchema;
