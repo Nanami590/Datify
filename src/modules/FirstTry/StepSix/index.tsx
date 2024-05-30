@@ -1,6 +1,6 @@
 import { EMOJI_LIST } from "@/entities/common/constant";
 import FirstTryInfo from "../FirstTryInfo";
-import { StringHelper } from "@/utils/helpers/Index";
+import { StringHelper } from "@/utils/helpers";
 import { FC, SyntheticEvent, useState } from "react";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
 import {

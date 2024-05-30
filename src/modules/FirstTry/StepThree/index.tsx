@@ -7,7 +7,7 @@ import Button from "@/ui/Button";
 import { FC } from "react";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
-import { StringHelper } from "@/utils/helpers/Index";
+import { StringHelper } from "@/utils/helpers";
 import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {

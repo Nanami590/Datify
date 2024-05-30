@@ -3,7 +3,7 @@ import Input from "@/ui/Input";
 import { FC } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
-import { StringHelper } from "@/utils/helpers/Index";
+import { StringHelper } from "@/utils/helpers";
 import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {

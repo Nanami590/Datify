@@ -1,4 +1,4 @@
-import { StringHelper } from "@/utils/helpers/Index";
+import { StringHelper } from "@/utils/helpers";
 import { EMOJI_LIST } from "../../constant";
 
 export const FirstTryStepSixCards = [

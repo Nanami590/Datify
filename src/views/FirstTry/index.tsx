@@ -21,11 +21,12 @@ import StepFour from "@/modules/FirstTry/StepFour";
 import StepFive from "@/modules/FirstTry/StepFive";
 import { ObjectSchema } from "yup";
 import StepSix from "@/modules/FirstTry/StepSix";
+import StepSeven from "@/modules/FirstTry/StepSeven";
 
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(7);
   const {
     register,
     getValues,
@@ -98,6 +99,13 @@ const FirstTry: FC = () => {
             errors={errors}
             setValue={setValue}
             value={getValues("interests")}
+          />
+        )}
+        {step === 7 && (
+          <StepSeven
+            errors={errors}
+            setValue={setValue}
+            value={getValues("images")}
           />
         )}
 

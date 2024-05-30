@@ -7,7 +7,7 @@ import { FC } from "react";
 import { FieldErrors, UseFormSetValue } from "react-hook-form";
 import FirstTryInfo from "../FirstTryInfo";
 import RadioCard from "@/ui/RadioCard";
-import { StringHelper } from "@/utils/helpers/Index";
+import { StringHelper } from "@/utils/helpers";
 import { EMOJI_LIST } from "@/entities/common/constant";
 
 type PropTypes = {

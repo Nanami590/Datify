@@ -1,0 +1,36 @@
+.file-upload-list {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    aspect-ratio: 3/4;
+    min-height: 300px;
+  }
+
+  &__input {
+    @include center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid $border-color;
+    background: $fields-color;
+    min-height: 300px;
+
+    svg {
+      @include icon(48px);
+
+      path {
+        fill: $dark-border-color;
+      }
+    }
+  }
+}
