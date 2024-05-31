@@ -10,11 +10,15 @@ import {
   stepFiveSchema,
   stepFourSchema,
   stepOneSchema,
+  stepSevenSchema,
   stepSixSchema,
   stepThreeSchema,
   stepTwoSchema,
 } from "./schema";
-import { FirstTryForm } from "@/entities/common/FirstTry/types";
+import {
+  FirstTryForm,
+  FirstTryFormFields,
+} from "@/entities/common/FirstTry/types";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StepThree from "@/modules/FirstTry/StepThree";
 import StepFour from "@/modules/FirstTry/StepFour";
@@ -23,10 +27,21 @@ import { ObjectSchema } from "yup";
 import StepSix from "@/modules/FirstTry/StepSix";
 import StepSeven from "@/modules/FirstTry/StepSeven";
 
+const defaultValues = {
+  [FirstTryFormFields.BIRTHDAY]: undefined,
+  [FirstTryFormFields.DISTANCE]: 30,
+  [FirstTryFormFields.GOAL]: undefined,
+  [FirstTryFormFields.IMAGES]: [],
+  [FirstTryFormFields.INTERESTS]: undefined,
+  [FirstTryFormFields.LOCATION]: undefined,
+  [FirstTryFormFields.NICKNAME]: "",
+  [FirstTryFormFields.SEX]: undefined,
+};
+
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(8);
   const {
     register,
     getValues,
@@ -34,6 +49,7 @@ const FirstTry: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FirstTryForm>({
+    defaultValues,
     resolver: yupResolver(
       getSchemaByStep(step) as ObjectSchema<{ [key: string]: string }>
     ) as unknown as Resolver<FirstTryForm>,
@@ -43,8 +59,6 @@ const FirstTry: FC = () => {
     setStep((prevState) => prevState + step);
 
   const onSubmit: SubmitHandler<FirstTryForm> = (data) => {
-    console.log("data", data, step);
-
     if (step < 8) {
       handleChangeStep(1)();
     } else if (data) {
@@ -68,28 +82,28 @@ const FirstTry: FC = () => {
         {step === 1 && <FirstTryStepOne register={register} errors={errors} />}
         {step === 2 && (
           <FirstTryStepTwo
-            value={getValues("birthday")}
+            value={getValues(FirstTryFormFields.BIRTHDAY)}
             register={register}
             errors={errors}
           />
         )}
         {step === 3 && (
           <StepThree
-            value={getValues("sex")}
+            value={getValues(FirstTryFormFields.SEX)}
             setValue={setValue}
             errors={errors}
           />
         )}
         {step === 4 && (
           <StepFour
-            value={getValues("goal")}
+            value={getValues(FirstTryFormFields.GOAL)}
             setValue={setValue}
             errors={errors}
           />
         )}
         {step === 5 && (
           <StepFive
-            value={getValues("distance")}
+            value={getValues(FirstTryFormFields.DISTANCE)}
             register={register}
             errors={errors}
           />
@@ -98,21 +112,22 @@ const FirstTry: FC = () => {
           <StepSix
             errors={errors}
             setValue={setValue}
-            value={getValues("interests")}
+            value={getValues(FirstTryFormFields.INTERESTS)}
           />
         )}
         {step === 7 && (
           <StepSeven
             errors={errors}
             setValue={setValue}
-            value={getValues("images")}
+            value={getValues(FirstTryFormFields.IMAGES)}
           />
         )}
 
         <Button
           disabled={
             step === 6 &&
-            (getValues("interests")?.length < 5 || !getValues("interests"))
+            (getValues(FirstTryFormFields.INTERESTS)?.length < 5 ||
+              !getValues("interests"))
           }
           className="first-try-page__form__submit"
           type="submit"
@@ -121,7 +136,7 @@ const FirstTry: FC = () => {
 
           {step === 6 ? (
             <span className="ml-1">
-              {getValues("interests")?.length || 0}/5
+              {getValues(FirstTryFormFields.INTERESTS)?.length || 0}/5
             </span>
           ) : (
             ""
@@ -146,6 +161,8 @@ function getSchemaByStep(step: number) {
       return stepFiveSchema;
     case 6:
       return stepSixSchema;
+    case 7:
+      return stepSevenSchema;
 
     default:
       return stepOneSchema;

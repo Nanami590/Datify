@@ -5,15 +5,26 @@ export type FirstTryFormGoalType =
   | "casual"
   | "serious_relationship";
 
+export enum FirstTryFormFields {
+  NICKNAME = "nickname",
+  BIRTHDAY = "birthday",
+  SEX = "sex",
+  GOAL = "goal",
+  DISTANCE = "distance",
+  INTERESTS = "interests",
+  IMAGES = "images",
+  LOCATION = "location",
+}
+
 export type FirstTryForm = {
-  nickname: string;
-  birthday: string;
-  sex: FirstTryFormSexType;
-  goal: FirstTryFormGoalType;
-  distance: number;
-  interests: FirstTryStepSixCardsType[];
-  images: number[];
-  location: unknown;
+  [FirstTryFormFields.NICKNAME]: string;
+  [FirstTryFormFields.BIRTHDAY]: string;
+  [FirstTryFormFields.SEX]: FirstTryFormSexType;
+  [FirstTryFormFields.GOAL]: FirstTryFormGoalType;
+  [FirstTryFormFields.DISTANCE]: number;
+  [FirstTryFormFields.INTERESTS]: FirstTryStepSixCardsType[];
+  [FirstTryFormFields.IMAGES]: string[];
+  [FirstTryFormFields.LOCATION]: unknown;
 };
 
 export type FirstTryStepThreeGroup = {

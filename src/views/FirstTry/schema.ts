@@ -43,3 +43,9 @@ export const stepSixSchema = yup
       .max(5),
   })
   .required();
+
+export const stepSevenSchema = yup
+  .object({
+    images: yup.array().of(yup.string()).required().min(1).max(6),
+  })
+  .required();

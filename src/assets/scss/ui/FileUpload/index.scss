@@ -10,11 +10,34 @@
   }
 
   &__image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    aspect-ratio: 3/4;
-    min-height: 300px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    svg.file-upload-list__image_icon {
+      @include icon(16px);
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: $remove-color;
+      border-radius: 50%;
+      padding: 2px;
+      cursor: pointer;
+
+      path {
+        color: $white;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      aspect-ratio: 3/4;
+      min-height: 200px;
+      background: $black;
+      border-radius: 8px;
+    }
   }
 
   &__input {
@@ -23,7 +46,9 @@
     height: 100%;
     border: 1px solid $border-color;
     background: $fields-color;
-    min-height: 300px;
+    min-height: 200px;
+    border-radius: 8px;
+    cursor: pointer;
 
     svg {
       @include icon(48px);
