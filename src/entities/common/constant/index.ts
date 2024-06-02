@@ -45,3 +45,5 @@ export enum EMOJI_LIST {
   DRESS = "1F457",
   MOTORCYCLE = "1F3CD",
 }
+
+export const USER_STORAGE_DATA = "userStorageData";

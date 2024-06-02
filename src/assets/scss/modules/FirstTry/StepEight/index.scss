@@ -1,0 +1,18 @@
+.first-try__step-eight {
+  @include center;
+  height: 80vh;
+  flex-direction: column;
+
+  &__description {
+    h4,
+    p {
+      text-align: center;
+    }
+  }
+
+  &__icon {
+    svg {
+      @include icon(64px);
+    }
+  }
+}

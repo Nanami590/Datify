@@ -21,7 +21,7 @@ const StepSeven: FC<PropTypes> = ({ errors, setValue, value }) => {
   };
 
   return (
-    <div className="first-try__step-six">
+    <div className="first-try__step-seven">
       <FirstTryInfo
         title={`Show your best self ${StringHelper.getEmoji(
           EMOJI_LIST.CAMERA

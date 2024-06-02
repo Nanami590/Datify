@@ -1,10 +1,10 @@
-import { ROUTES } from "@/entities/common/constant";
+// import { ROUTES } from "@/entities/common/constant";
 import { FirstTryStepOne, FirstTryStepTwo } from "@/modules/FirstTry";
 import Button from "@/ui/Button";
 import LineStepper from "@/ui/LineStepper";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   stepFiveSchema,
@@ -26,6 +26,9 @@ import StepFive from "@/modules/FirstTry/StepFive";
 import { ObjectSchema } from "yup";
 import StepSix from "@/modules/FirstTry/StepSix";
 import StepSeven from "@/modules/FirstTry/StepSeven";
+import StepEight from "@/modules/FirstTry/StepEight";
+import { getLocation } from "@/utils/helpers/getLocation";
+import { USER_STORAGE_DATA } from "@/entities/common/constant";
 
 const defaultValues = {
   [FirstTryFormFields.BIRTHDAY]: undefined,
@@ -40,8 +43,8 @@ const defaultValues = {
 
 // TODO add captcha if we add to host https://www.npmjs.com/package/react-google-recaptcha (and add max step)
 const FirstTry: FC = () => {
-  const navigate = useNavigate();
-  const [step, setStep] = useState(8);
+  // const navigate = useNavigate();
+  const [step, setStep] = useState(1);
   const {
     register,
     getValues,
@@ -55,16 +58,53 @@ const FirstTry: FC = () => {
     ) as unknown as Resolver<FirstTryForm>,
   });
 
-  const handleChangeStep = (step: 1 | -1) => () =>
-    setStep((prevState) => prevState + step);
+  const handleChangeStep = (value: 1 | -1) => () => {
+    const isBack = value === -1;
+
+    setStep((prevState) => {
+      if (prevState <= 1 && isBack) {
+        // TODO navigate to prev page
+        return 1;
+      }
+
+      return prevState + value;
+    });
+  };
+
+  const handleLocationSuccess =
+    (data: FirstTryForm) => (location: GeolocationPosition) => {
+      // TODO send at backend all data
+      // TODO navigate
+      console.log(location, data);
+      localStorage.setItem(USER_STORAGE_DATA, JSON.stringify(data));
+    };
+
+  const handleLocationFailure = () => {
+    // TODO add logic
+    console.log("getting location failure");
+  };
 
   const onSubmit: SubmitHandler<FirstTryForm> = (data) => {
     if (step < 8) {
       handleChangeStep(1)();
     } else if (data) {
-      navigate(ROUTES.HOME);
+      getLocation(handleLocationSuccess(data), handleLocationFailure);
     }
   };
+
+  const buttonText = useMemo(() => {
+    if (step === 8) {
+      return "Allow Location";
+    }
+
+    if (step === 6) {
+      return `Continue ${
+        getValues(FirstTryFormFields.INTERESTS)?.length || 0
+      }/5`;
+    }
+
+    return "Continue";
+  }, [step, getValues(FirstTryFormFields.INTERESTS)?.length]);
 
   return (
     <main className="first-try-page">
@@ -122,6 +162,7 @@ const FirstTry: FC = () => {
             value={getValues(FirstTryFormFields.IMAGES)}
           />
         )}
+        {step === 8 && <StepEight />}
 
         <Button
           disabled={
@@ -132,15 +173,7 @@ const FirstTry: FC = () => {
           className="first-try-page__form__submit"
           type="submit"
         >
-          <span>Continue</span>
-
-          {step === 6 ? (
-            <span className="ml-1">
-              {getValues(FirstTryFormFields.INTERESTS)?.length || 0}/5
-            </span>
-          ) : (
-            ""
-          )}
+          <span>{buttonText}</span>
         </Button>
       </form>
     </main>

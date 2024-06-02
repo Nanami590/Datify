@@ -24,7 +24,7 @@ export type FirstTryForm = {
   [FirstTryFormFields.DISTANCE]: number;
   [FirstTryFormFields.INTERESTS]: FirstTryStepSixCardsType[];
   [FirstTryFormFields.IMAGES]: string[];
-  [FirstTryFormFields.LOCATION]: unknown;
+  [FirstTryFormFields.LOCATION]: GeolocationPosition;
 };
 
 export type FirstTryStepThreeGroup = {
